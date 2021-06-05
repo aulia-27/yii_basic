@@ -48,6 +48,10 @@ AppAsset::register($this);
                 ['label' => 'Jenis', 'url' => ['jenis/index', 'tag' => 'jenis']],
                 ['label' => 'Supplier', 'url' => ['supplier/index', 'tag' => 'suppler']],
             ]],
+            ['label' => 'Data Pelajar', 'url' => ['#'], 'items' => [
+                ['label' => 'Pelajar', 'url' => ['pelajar/index', 'tag' => 'barang']],
+                ['label' => 'Fakultas', 'url' => ['fakultas/index', 'tag' => 'jenis']],
+            ]],
             ['label' => 'About', 'url' => ['/site/about']],
             ['label' => 'Contact', 'url' => ['/site/contact']],
             Yii::$app->user->isGuest ? (
