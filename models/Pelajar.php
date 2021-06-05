@@ -22,6 +22,7 @@ class Pelajar extends \yii\db\ActiveRecord
     /**
      * {@inheritdoc}
      */
+    
     public static function tableName()
     {
         return 'pelajar';
@@ -38,7 +39,7 @@ class Pelajar extends \yii\db\ActiveRecord
             [['id_fakultas'], 'integer'],
             [['nim'], 'string', 'max' => 20],
             [['nama'], 'string', 'max' => 35],
-            [['jekel'], 'string', 'max' => 8],
+            [['jekel'], 'string', 'max' => 15],
             [['alamat'], 'string', 'max' => 100],
             [['id_fakultas'], 'exist', 'skipOnError' => true, 'targetClass' => Fakultas::className(), 'targetAttribute' => ['id_fakultas' => 'id']],
         ];

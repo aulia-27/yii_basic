@@ -18,18 +18,22 @@ use kartik\date\DatePicker;
 
     <?= $form->field($model, 'nama')->textInput(['maxlength' => true]) ?>
 
-    <?php //$form->field($model, 'tgl_lahir')->textInput() 
-        echo $form->field($model, 'date_1')->widget(DatePicker::classname(), 
+    <?php
+        echo $form->field($model, 'tgl_lahir')->widget(DatePicker::classname(), 
             ['options' => ['placeholder' => 'Pilih Tanggal Lahir ...'],
-            'pluginOptions' => ['autoclose'=>true]
+            'pluginOptions' => [
+                'autoclose'=>true,
+                'format' => 'yyyy-mm-dd'
+            ]
         ]);
     ?>
 
-    <?= $form->field($model, 'jekel')->textInput(['maxlength' => true]) ?>
+    <?= $form->field($model, 'jekel')->radioList(array('Laki-Laki'=>'Laki-Laki', 'Perempuan'=>'Perempuan'))->label('Jenis Kelamin') 
+    ?>
 
     <?= $form->field($model, 'alamat')->textInput(['maxlength' => true]) ?>
 
-    <?php //$form->field($model, 'id_fakultas')->textInput()
+    <?php
         $dataPost=ArrayHelper::map(\app\models\Fakultas::find()->asArray()->all(), 'id', 'nama_fakultas');
         echo $form->field($model, 'id_fakultas')
         ->dropDownList(

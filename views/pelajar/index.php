@@ -31,8 +31,9 @@ $this->params['breadcrumbs'][] = $this->title;
             'nama',
             'tgl_lahir',
             'jekel',
-            //'alamat',
+            'alamat',
             //'id_fakultas',
+            'fakultas.nama_fakultas',
 
             ['class' => 'yii\grid\ActionColumn'],
         ],
