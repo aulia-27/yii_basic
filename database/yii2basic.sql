@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jun 05, 2021 at 05:08 PM
+-- Generation Time: Jun 25, 2021 at 04:23 PM
 -- Server version: 10.4.11-MariaDB
 -- PHP Version: 7.4.3
 
@@ -89,7 +89,6 @@ INSERT INTO `country` (`code`, `name`, `population`) VALUES
 
 CREATE TABLE `fakultas` (
   `id` int(11) NOT NULL,
-  `no_fakultas` varchar(15) NOT NULL,
   `nama_fakultas` varchar(100) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
@@ -97,10 +96,11 @@ CREATE TABLE `fakultas` (
 -- Dumping data for table `fakultas`
 --
 
-INSERT INTO `fakultas` (`id`, `no_fakultas`, `nama_fakultas`) VALUES
-(1, '10011', 'Fakultas Teknologi Informasi'),
-(2, '10002', 'Fakultas Tenik Mesin'),
-(3, '10001', 'Fakultas Kedokteran');
+INSERT INTO `fakultas` (`id`, `nama_fakultas`) VALUES
+(1, 'Fakultas Teknologi Informasi'),
+(2, 'Fakultas Tenik '),
+(3, 'Fakultas Kedokteran'),
+(4, 'Fakultas Ilmu Komunikasi');
 
 -- --------------------------------------------------------
 
@@ -135,7 +135,9 @@ CREATE TABLE `mahasiswa` (
   `id` int(11) NOT NULL,
   `nim` varchar(18) NOT NULL,
   `nama` varchar(50) NOT NULL,
+  `tgl_lahir` date NOT NULL,
   `jekel` char(1) NOT NULL DEFAULT 'L',
+  `id_fakultas` int(11) NOT NULL,
   `id_prodi` int(11) NOT NULL,
   `email` varchar(50) NOT NULL,
   `alamat` varchar(100) NOT NULL
@@ -145,18 +147,9 @@ CREATE TABLE `mahasiswa` (
 -- Dumping data for table `mahasiswa`
 --
 
-INSERT INTO `mahasiswa` (`id`, `nim`, `nama`, `jekel`, `id_prodi`, `email`, `alamat`) VALUES
-(1, '19003', 'Garao', 'L', 1003, 'Garao@gmail.com', 'Payakumbuh'),
-(3, '19006', 'Tuti', 'P', 1003, 'Tuti@gmail.com', 'Bukittinggi'),
-(4, '19007', 'Setia', 'L', 1001, 'Setia@gmail.com', 'Padang Panjang'),
-(5, '19008', 'Perempuan', 'P', 1001, 'Perempuan@gmail.com', 'Bukittinggi'),
-(6, '19009', 'Anggun', 'P', 1001, 'Anggun@gmail.com', 'Padang '),
-(7, '190010', 'Putra', 'L', 1003, 'Putra@gmail.com', 'Bukittinggi'),
-(8, '190012', 'Anton', 'L', 1003, 'Anton.aa@gmail.com', 'Solok'),
-(9, '190014', 'Grogi G', 'L', 1002, 'Grogi@gmail.com', 'Bukittinggi'),
-(10, '190015', 'Antonio', 'L', 1002, 'Antonio@gmail.com', 'Painan'),
-(11, '190016', 'Budi G', 'L', 1003, 'budiG@gmail.com', 'Bukittinggi'),
-(12, '190013', 'Anton', 'L', 1002, 'budiG@gmail.com', 'Bukittinggi');
+INSERT INTO `mahasiswa` (`id`, `nim`, `nama`, `tgl_lahir`, `jekel`, `id_fakultas`, `id_prodi`, `email`, `alamat`) VALUES
+(1, '190001', 'Budi G', '2001-07-10', 'L', 1, 1, 'budiG@gmail.com', 'Bukittinggi'),
+(2, '190002', 'Anton', '2002-06-12', 'L', 3, 3, 'Anton@gmail.com', 'Pauh, Padang');
 
 -- --------------------------------------------------------
 
@@ -190,6 +183,7 @@ INSERT INTO `pelajar` (`id`, `nim`, `nama`, `tgl_lahir`, `jekel`, `alamat`, `id_
 
 CREATE TABLE `prodi` (
   `id` int(11) NOT NULL,
+  `id_fakultas` int(11) NOT NULL,
   `prodi` varchar(50) NOT NULL,
   `keterangan` varchar(50) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
@@ -198,10 +192,11 @@ CREATE TABLE `prodi` (
 -- Dumping data for table `prodi`
 --
 
-INSERT INTO `prodi` (`id`, `prodi`, `keterangan`) VALUES
-(1001, 'MI', 'Manajemen Informasi'),
-(1002, 'TK', 'Teknik Komputer '),
-(1003, 'TRPL', 'Teknologi Rekayasa Perangkat Lunak');
+INSERT INTO `prodi` (`id`, `id_fakultas`, `prodi`, `keterangan`) VALUES
+(1, 1, 'TRPL', 'Teknologi Rekayasa Perangkat Lunak'),
+(2, 2, 'TM', 'Teknik Mesin '),
+(3, 3, 'PenDok', 'Pendidikan Kedokteran'),
+(4, 4, 'HI', 'Hubungan Internasional');
 
 -- --------------------------------------------------------
 
@@ -264,7 +259,8 @@ ALTER TABLE `jenis`
 --
 ALTER TABLE `mahasiswa`
   ADD PRIMARY KEY (`id`),
-  ADD KEY `id_prodi` (`id_prodi`);
+  ADD KEY `id_prodi` (`id_prodi`),
+  ADD KEY `id_fakultas` (`id_fakultas`);
 
 --
 -- Indexes for table `pelajar`
@@ -277,7 +273,8 @@ ALTER TABLE `pelajar`
 -- Indexes for table `prodi`
 --
 ALTER TABLE `prodi`
-  ADD PRIMARY KEY (`id`);
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `id_fakultas` (`id_fakultas`);
 
 --
 -- Indexes for table `supplier`
@@ -299,7 +296,7 @@ ALTER TABLE `barang`
 -- AUTO_INCREMENT for table `fakultas`
 --
 ALTER TABLE `fakultas`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `jenis`
@@ -311,7 +308,7 @@ ALTER TABLE `jenis`
 -- AUTO_INCREMENT for table `mahasiswa`
 --
 ALTER TABLE `mahasiswa`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `pelajar`
@@ -323,7 +320,7 @@ ALTER TABLE `pelajar`
 -- AUTO_INCREMENT for table `prodi`
 --
 ALTER TABLE `prodi`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1004;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `supplier`
@@ -346,13 +343,20 @@ ALTER TABLE `barang`
 -- Constraints for table `mahasiswa`
 --
 ALTER TABLE `mahasiswa`
-  ADD CONSTRAINT `mahasiswa_ibfk_1` FOREIGN KEY (`id_prodi`) REFERENCES `prodi` (`id`);
+  ADD CONSTRAINT `mahasiswa_ibfk_1` FOREIGN KEY (`id_prodi`) REFERENCES `prodi` (`id`),
+  ADD CONSTRAINT `mahasiswa_ibfk_2` FOREIGN KEY (`id_fakultas`) REFERENCES `fakultas` (`id`);
 
 --
 -- Constraints for table `pelajar`
 --
 ALTER TABLE `pelajar`
   ADD CONSTRAINT `pelajar_ibfk_1` FOREIGN KEY (`id_fakultas`) REFERENCES `fakultas` (`id`);
+
+--
+-- Constraints for table `prodi`
+--
+ALTER TABLE `prodi`
+  ADD CONSTRAINT `prodi_ibfk_1` FOREIGN KEY (`id_fakultas`) REFERENCES `fakultas` (`id`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

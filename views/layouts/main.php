@@ -40,8 +40,6 @@ AppAsset::register($this);
         'items' => [
             ['label' => 'Home', 'url' => ['/site/index']],
             ['label' => 'Fitur', 'url' => ['/site/fitur']],
-            ['label' => 'Mahasiswa', 'url' => ['/mahasiswa/index']],
-            ['label' => 'Prodi', 'url' => ['/prodi/index']],
             ['label' => 'Country', 'url' => ['/country/index']],
             ['label' => 'Barang', 'url' => ['#'], 'items' => [
                 ['label' => 'Barang', 'url' => ['barang/index', 'tag' => 'barang']],
@@ -49,8 +47,9 @@ AppAsset::register($this);
                 ['label' => 'Supplier', 'url' => ['supplier/index', 'tag' => 'suppler']],
             ]],
             ['label' => 'Data Pelajar', 'url' => ['#'], 'items' => [
-                ['label' => 'Pelajar', 'url' => ['pelajar/index', 'tag' => 'barang']],
-                ['label' => 'Fakultas', 'url' => ['fakultas/index', 'tag' => 'jenis']],
+                ['label' => 'Mahasiswa', 'url' => ['mahasiswa/index', 'tag' => 'mahasiswa']],
+                ['label' => 'Fakultas', 'url' => ['fakultas/index', 'tag' => 'fakultas']],
+                ['label' => 'Prodi', 'url' => ['prodi/index', 'tag' => 'prodi']],
             ]],
             ['label' => 'About', 'url' => ['/site/about']],
             ['label' => 'Contact', 'url' => ['/site/contact']],

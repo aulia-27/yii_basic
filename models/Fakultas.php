@@ -8,10 +8,10 @@ use Yii;
  * This is the model class for table "fakultas".
  *
  * @property int $id
- * @property string $no_fakultas
  * @property string $nama_fakultas
  *
  * @property Pelajar[] $pelajars
+ * @property Prodi[] $prodis
  */
 class Fakultas extends \yii\db\ActiveRecord
 {
@@ -23,14 +23,18 @@ class Fakultas extends \yii\db\ActiveRecord
         return 'fakultas';
     }
 
+    public static function getFakultas()
+    {
+        return Self::find()->select(['nama_fakultas', 'id'])->indexBy('id')->column();
+    }
+
     /**
      * {@inheritdoc}
      */
     public function rules()
     {
         return [
-            [['no_fakultas', 'nama_fakultas'], 'required'],
-            [['no_fakultas'], 'string', 'max' => 15],
+            [['nama_fakultas'], 'required'],
             [['nama_fakultas'], 'string', 'max' => 100],
         ];
     }
@@ -42,7 +46,6 @@ class Fakultas extends \yii\db\ActiveRecord
     {
         return [
             'id' => 'ID',
-            'no_fakultas' => 'No Fakultas',
             'nama_fakultas' => 'Nama Fakultas',
         ];
     }
@@ -52,8 +55,15 @@ class Fakultas extends \yii\db\ActiveRecord
      *
      * @return \yii\db\ActiveQuery
      */
-    public function getPelajars()
+
+    public function getMahasiswa()
     {
-        return $this->hasMany(Pelajar::className(), ['id_fakultas' => 'id']);
+        
+        return $this->hasOne(Mahasiswa::className(),['id_fakultas'=>'id']);
     }
+    /**
+     * Gets query for [[Prodis]].
+     *
+     * @return \yii\db\ActiveQuery
+     */
 }
