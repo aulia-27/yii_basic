@@ -27,8 +27,9 @@ use app\models\Fakultas;
         $form->field($model, 'tgl_lahir')->widget(DatePicker::classname(), [
             'options' => ['placeholder' => 'Pilih Tanggal ...'],
             'pluginOptions' => [
-            'autoclose'=>true,
-            'format' => 'dd MM yyyy']
+                'autoclose'=>true,
+                'format' => 'dd MM yyyy'
+            ]
         ]); 
     ?>
 
