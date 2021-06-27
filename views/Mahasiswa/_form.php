@@ -42,7 +42,7 @@ use app\models\Fakultas;
 
     <?=  $form->field($model, 'id_prodi') ->widget(DepDrop::classname(), 
         [
-            'data' => Prodi::getProdiList($model->id_fakultas), 
+            'data' => Prodi::getProdiList($model->id_fakultas, $model->nim), 
             'options' => ['id' => 'prodi','prompt' => 'Select Prodi.....'],
             'pluginOptions' => [
                 'depends' => ['fakultas'],
